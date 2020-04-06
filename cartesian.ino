@@ -1,109 +1,85 @@
 /*
 
-    Cartesian, Hafidh Satyanto
+    Cartesian
+    Hafidh Satyanto
 
-    Based on rosserial, will send vector3 position messages based on processed BNO055 accelerometer data.
-    The BNO055 has built-in motion processors that (annoyingly) auto-calibrates its sensors, but also
-    does the heavy sensor fusion stuff so I don't have to (yeet). So, the BNO055 already outputs linearized,
-    processed acceleration data based on its gyroscope (which should remove any gravity-influenced values) 
-    so we don't need to do AHRS sensor fusion algorithms.
+    This is an Arduino sketch that will connect to rosserial and publish linear acceleration data as a Vector3
+    message on the /raw_linear_accel topic. The BNO055 has built-in motion processors that auto-calibrates its
+    sensors and does the heavy sensor fusion stuff (yeet!) of (trying) to remove the gravity vector.
+
+    The raw linear acceleration data was noisier than I thought. So, I will process it further through a separate
+    ROS node (as it will run on my laptop instead of the Arduino) so calculations hopefully can be much faster.
+
+    I tested different baud rates using an Arduino UNO with an ATMEGA328P on a Baud rate of 500,000 and it works
+    through rosserial... I think it's overkill (and probably a bad idea because of data bit corruption) so...
+    I toned it down to 230400 and 250000 but it seems like rosserial does not 'sync' at that rate, so...
+
+    Sidenote: tested without ros::spinOnce() since there were no callbacks, I thought there was no need. WRONG!
 
 */
 
 
-// ROS includes
-#include <ArduinoTcpHardware.h>
-#include <ArduinoHardware.h>
+// ROS includes 
 #include <ros.h>
 #include <geometry_msgs/Vector3.h>
 
-// Arduino includes
+
+// Arduino & Sensor includes
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BNO055.h>
+#include <utility/imumaths.h>
 
-// we are integrating so we'll need some... time
-uint16_t SampleRateDelay = 15;  // poll / sampling rate from the imu sensor
-uint16_t PrintRateDelay = 500;  // we're printing data
-uint16_t PrintCounter = 0;      // we're counting our prints so we don't print every sample (15ms)
 
-// our position values!
-double xPos = 0, yPos = 0, zPos = 0;
-double Acceleration_Velocity_Transition = (double)(SampleRateDelay) / 1000.0;
-double Acceleration_Position_Transition = 0.5 * Acceleration_Velocity_Transition * Acceleration_Velocity_Transition;
+// The BNO055 has a sample rate of 100Hz, so our maximum sampling rate is 10 milliseconds. (10*1000 microseconds)
+uint16_t imuSampleRate = 10000;
 
-// the imu sensor outputs in degrees but we'll need to use radians
-const double DegreeRadianConversion = 0.01745329251;
 
-// Adafruit BNO055 sensor class (all the hardware-level drivers)
-Adafruit_BNO055 Sensor = Adafruit_BNO055(55, 0x28);
+// Define our sensor class using the provided library - (by default the address is 0x28 using I2C)
+Adafruit_BNO055 imuSensor = Adafruit_BNO055(55, 0x28);
 
-void vectorCallback(const geometry_msgs::Vector3& vector3) {
 
-}
+// Defines for our ROS node handle, publisher, and message type
+ros::NodeHandle imuHandler;
+geometry_msgs::Vector3 imuVector;
+ros::Publisher imuPublisher("raw_linear_accel", &imuVector);
 
-// ROS node class initializers
-ros::NodeHandle Handle;
-ros::Subscriber<geometry_msgs::Vector3> TargetPoseSubscriber("target_pose", vectorCallback);
 
 void setup() {
+    // Initialize our ROS node
+    imuHandler.initNode();
+    imuHandler.advertise(imuPublisher);
+  
+    // Open up our serial port at 250,000 baud rate.
+    Serial.begin(500000);
 
-    // initialize the ROS stuff
-    Handle.initNode();
-    Handle.subscribe(TargetPoseSubscriber);
-
-    // start a serial monitor for debugging purposes
-    Serial.begin(115200);
-
-    // wait until sensor is connected / initialized
-    if (Sensor.begin()) {
-        Serial.print("No BNO055 detected");
+    // Pre-check
+    Serial.println(F("Starting BNO055...!"));
+    if (!imuSensor.begin()) {
         while (1);
+        Serial.println(F("No BNO055 detected - Check Wiring or I2C Address..."));
     }
 
+    delay(1000);
 }
 
-void loop(void) {
 
-    unsigned long tStart = micros();
-    sensors_event_t OrientationData;
-    sensors_event_t LinearAccelerationData;
+void loop() {
+    // We 'time-stamp' our current board time to more accurately 'poll' the sensor
+    unsigned long curTime = micros();
 
-    Sensor.getEvent(&OrientationData, Adafruit_BNO055::Vector_EULER);
-    Sensor.getEvent(&LinearAccelerationData, Adafruit_BNO055::VECTOR_LINEARACCEL);
+    // The data type is provided by the imumaths library and we call the getVector function to get the data.
+    imu::Vector<3> sensorData = imuSensor.getVector(Adafruit_BNO055::VECTOR_LINEARACCEL);
 
-    xPos = xPos + Acceleration_Position_Transition * LinearAccelerationData.acceleration.x;
-    yPos = yPos + Acceleration_Position_Transition * LinearAccelerationData.acceleration.y;
-    zPos = zPos + Acceleration_Position_Transition * LinearAccelerationData.acceleration.z;
+    imuVector.x = sensorData.x();
+    imuVector.y = sensorData.y();
+    imuVector.z = sensorData.z();
 
-    if (PrintCounter * SampleRateDelay >= PrintRateDelay) {
+    // publish our Vector3 message through rosserial
+    imuPublisher.publish(&imuVector);
+    imuHandler.spinOnce();
 
-        Serial.println("Position X: ");
-        Serial.print(xPos);
-        Serial.println("(Linear) Acceleration X: ");
-        Serial.print(LinearAccelerationData.acceleration.x);
-
-        Serial.println("Position Y: ");
-        Serial.print(yPos);
-        Serial.println("(Linear) Acceleration Y: ");
-        Serial.print(LinearAccelerationData.acceleration.y);
-
-        Serial.println("Position Z: ");
-        Serial.print(zPos);
-        Serial.println("(Linear) Acceleration Z: ");
-        Serial.print(LinearAccelerationData.acceleration.z);
-
-        Serial.println("------------------------------");
-
-        PrintCounter = 0;
-    } else {
-        PrintCounter = PrintCounter + 1;
+    // We then compare our previous time stamp with the current time stamp to poll the sensor
+    while ((micros() - curTime) < (imuSampleRate)) {
     }
-
-    // We are awaiting a poll so that the imu sensor can sample
-    while ((micros() - tStart) < (SampleRateDelay * 1000)) {}   
-
-    // ROS spin
-    Handle.spinOnce();
-    delay(1);
 }
