@@ -7,6 +7,8 @@
         <p id="xPos">xPos: ...</p>
         <p id="yPos">yPos: ...</p>
         <p id="zPos">zPos: ....</p>
+        <p id="debugmsg">debug: </p>
+        <p id="debugjson">debugjson: </p>
         <!-- <script src="./server.js"></script> -->
         <script>
             var HOST = location.origin.replace(/^http/, 'ws')
@@ -30,6 +32,8 @@
                 document.getElementById('xPos').innerHTML = dataobj.xPos;
                 document.getElementById('yPos').innerHTML = dataobj.yPos;
                 document.getElementById('zPos').innerHTML = dataobj.zPos;
+                document.getElementById('debugmsg') = "debugmsg: " + string;
+                docuemnt.getElementById('debugjson') = "debugjson: " + dataobj;
             }
         </script>
 
