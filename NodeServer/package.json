@@ -1,0 +1,21 @@
+{
+  "name": "cartesian-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "12.17.x"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "satyanto",
+  "license": "ISC",
+  "dependencies": {
+    "bufferutil": "^4.0.1",
+    "express": "^4.17.1",
+    "utf-8-validate": "^5.0.2",
+    "ws": "^7.3.1"
+  }
+}

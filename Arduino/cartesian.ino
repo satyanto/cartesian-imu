@@ -16,6 +16,8 @@
 
     Sidenote: tested without ros::spinOnce() since there were no callbacks, I thought there was no need. WRONG!
 
+    Final Baud Rate : 115200
+
 */
 
 
@@ -50,8 +52,8 @@ void setup() {
     imuHandler.initNode();
     imuHandler.advertise(imuPublisher);
   
-    // Open up our serial port at 250,000 baud rate.
-    Serial.begin(500000);
+    // Open up our serial port at 115200 baud rate.
+    Serial.begin(115200);
 
     // Pre-check
     Serial.println(F("Starting BNO055...!"));
