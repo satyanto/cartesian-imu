@@ -1,2 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-ARKit-Data-Logger/Pods-ARKit-Data-Logger-frameworks.sh
+${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework
 ${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework
+${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework

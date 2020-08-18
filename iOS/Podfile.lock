@@ -1,16 +1,24 @@
 PODS:
+  - ObjectMapper (3.4.2)
   - Starscream (4.0.4)
+  - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
+  - ObjectMapper
   - Starscream (~> 4.0.0)
+  - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
   trunk:
+    - ObjectMapper
     - Starscream
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
+  ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 71a875137b00f4dcfc5a61ba94a4ec09374fd443
+PODFILE CHECKSUM: 8361a78842d59734e1878c9d32aa5eb1aaabcecd
 
 COCOAPODS: 1.9.3

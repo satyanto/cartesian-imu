@@ -6,6 +6,9 @@ target 'ARKit-Data-Logger' do
   use_frameworks!
 
   # Pods for ARKit-Data-Logger
-  pod 'Starscream', '~> 4.0.0'
+  pod 'Starscream', '~>4.0.0'
+  pod 'SwiftyJSON', '~>4.0'
+  pod 'ObjectMapper'
+  #pod 'RBSManager'
 
 end

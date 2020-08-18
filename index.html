@@ -3,14 +3,33 @@
     <title>Cartesian Server</title>
     <body>
         <h2>Cartesian Server</h2>
-        <p id="jsonlabel">Heyyyyyyyyyyy........</p>
+        <p id="status">status: heyyyyy (we are waiting for you)</p>
+        <p id="xPos">xPos: ...</p>
+        <p id="yPos">yPos: ...</p>
+        <p id="zPos">zPos: ....</p>
         <!-- <script src="./server.js"></script> -->
         <script>
             var HOST = location.origin.replace(/^http/, 'ws')
             var ws = new WebSocket(HOST);
+            
+            ws.onopen = function (event) {
+                document.getElementById('status').innerHTML = "status: websocket is open and ready";
+            }
+
+            ws.onclose = function (event) {
+                document.getElementById('status').innerHTML = "status: websocket is closed";
+            }
+
+            ws.onerror = function (event) {
+                document.getElementById('status').innerHTML = "status: websocket error: " + event.data;
+            }
 
             ws.onmessage = function (event) {
-                document.getElementById('jsonlabel').innerHTML = event.data;
+                var string = event.data;
+                var dataobj = JSON.parse(string);
+                document.getElementById('xPos').innerHTML = dataobj.xPos;
+                document.getElementById('yPos').innerHTML = dataobj.yPos;
+                document.getElementById('zPos').innerHTML = dataobj.zPos;
             }
         </script>
 

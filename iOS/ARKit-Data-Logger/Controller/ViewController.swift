@@ -13,10 +13,19 @@ import os.log
 import Accelerate
 import Foundation
 import Starscream
+import SwiftyJSON
+import ObjectMapper
+//import RBSManager
 
 
 
-class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, WebSocketDelegate {
+class ViewController:
+    UIViewController,
+    ARSCNViewDelegate,
+    ARSessionDelegate,
+    WebSocketDelegate
+    {
+    
 
     // MARK: - Properties
     @IBOutlet weak var Xpos: UILabel!
@@ -40,6 +49,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, We
     var isConnected = false
     let server = WebSocketServer()
     
+    // custom JSON class for our websocket server
+    struct ARPosition : Codable {
+        let xPos: Float64
+        let yPos: Float64
+        let zPos: Float64
+    }
+    
+    // ros
+//    var rosManager: RBSManager?
+//    var rosPublisher: RBSPublisher?
+//    var rosConnected: Bool = false
+//    var rosSocketAddress: String = "ws://0.0.0.0:9090" // IP or name of ROS master
+//
     // constants for collecting data
     let numTextFiles = 2
     let ARKIT_CAMERA_POSE = 0
@@ -63,7 +85,21 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, We
     var fileHandlers = [FileHandle]()
     var fileURLs = [URL]()
     var fileNames: [String] = ["ARKit_camera_pose.txt", "ARKit_point_cloud.txt"]
-    
+
+    // ros
+//    func manager(_ manager: RBSManager, didDisconnect error: Error?) {
+//        rosConnected = false
+//        print(error?.localizedDescription ?? "connection did disconnect")
+//    }
+//
+//    func managerDidConnect(_ manager: RBSManager) {
+//        rosConnected = true
+//    }
+//
+//    func manager(_ manager: RBSManager, threwError error: Error) {
+//        rosConnected = false
+//        print(error.localizedDescription)
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,6 +117,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, We
         sceneView.showsStatistics = true
         sceneView.session.delegate = self
         
+        // ros publisher
+//        rosPublisher = rosManager?.addPublisher(topic: "/ARKit_vector", messageType: "geometry_msgs/Vector3", messageClass: Vector3Message.self)
+//
         // websocket connect
         var request = URLRequest(url: URL(string: "ws://cartesian-server.herokuapp.com")!)
         request.timeoutInterval = 10
@@ -117,7 +156,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, We
             isConnected = false
         }
     }
-    
+
     func handleWebSocketError(_ error: Error?) {
         if let e = error as? WSError {
             print("websocket encountered an error: \(e.message)")
@@ -151,66 +190,73 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, We
     // when the Start/Stop button is pressed
     @IBAction func startStopButtonPressed(_ sender: UIButton) {
         if (self.isRecording == false) {
-            
+            self.startStopButton.setTitle("Stop", for: .normal)
+            self.statusLabel.text = "Tracking"
+            UIApplication.shared.isIdleTimerDisabled = true
+            self.isRecording = true
             // start ARKit data recording
-            customQueue.async {
-                if (self.createFiles()) {
-                    DispatchQueue.main.async {
-                        // reset timer
-                        self.secondCounter = 0
-                        self.recordingTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { (Timer) -> Void in
-                            self.secondCounter += 1
-                        })
-                        
-                        // update UI
-                        self.startStopButton.setTitle("Stop", for: .normal)
-                        
-                        // make sure the screen won't lock
-                        UIApplication.shared.isIdleTimerDisabled = true
-                    }
-                    self.isRecording = true
-                } else {
-                    self.errorMsg(msg: "Failed to create the file")
-                    return
-                }
-            }
+//            customQueue.async {
+//                if (self.createFiles()) {
+//                    DispatchQueue.main.async {
+//                        // reset timer
+//                        self.secondCounter = 0
+//                        self.recordingTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { (Timer) -> Void in
+//                            self.secondCounter += 1
+//                        })
+//
+//                        // update UI
+//                        self.startStopButton.setTitle("Stop", for: .normal)
+//
+//                        // make sure the screen won't lock
+//                        UIApplication.shared.isIdleTimerDisabled = true
+//                    }
+//                    self.isRecording = true
+//                } else {
+//                    self.errorMsg(msg: "Failed to create the file")
+//                    return
+//                }
+//            }
         } else {
             
-            // stop recording and share the recorded text file
-            if (recordingTimer.isValid) {
-                recordingTimer.invalidate()
-            }
+            self.startStopButton.setTitle("Start", for: .normal)
+            self.statusLabel.text = "Ready"
+            self.isRecording = false
             
-            customQueue.async {
-                self.isRecording = false
-                
-                // save ARKit 3D point cloud only for visualization
-                for i in 0...(self.accumulatedPointCloud.count - 1) {
-                    let ARKitPointData = String(format: "%.6f %.6f %.6f %d %d %d \n",
-                                                self.accumulatedPointCloud.points[i].x,
-                                                self.accumulatedPointCloud.points[i].y,
-                                                self.accumulatedPointCloud.points[i].z,
-                                                self.accumulatedPointCloud.colors[i].x,
-                                                self.accumulatedPointCloud.colors[i].y,
-                                                self.accumulatedPointCloud.colors[i].z)
-                    if let ARKitPointDataToWrite = ARKitPointData.data(using: .utf8) {
-                        self.fileHandlers[self.ARKIT_POINT_CLOUD].write(ARKitPointDataToWrite)
-                    } else {
-                        os_log("Failed to write data record", log: OSLog.default, type: .fault)
-                    }
-                }
-                
-                // close the file handlers
-                if (self.fileHandlers.count == self.numTextFiles) {
-                    for handler in self.fileHandlers {
-                        handler.closeFile()
-                    }
-                    DispatchQueue.main.async {
-                        let activityVC = UIActivityViewController(activityItems: self.fileURLs, applicationActivities: nil)
-                        self.present(activityVC, animated: true, completion: nil)
-                    }
-                }
-            }
+//            // stop recording and share the recorded text file
+//            if (recordingTimer.isValid) {
+//                recordingTimer.invalidate()
+//            }
+//
+//            customQueue.async {
+//                self.isRecording = false
+//
+//                // save ARKit 3D point cloud only for visualization
+//                for i in 0...(self.accumulatedPointCloud.count - 1) {
+//                    let ARKitPointData = String(format: "%.6f %.6f %.6f %d %d %d \n",
+//                                                self.accumulatedPointCloud.points[i].x,
+//                                                self.accumulatedPointCloud.points[i].y,
+//                                                self.accumulatedPointCloud.points[i].z,
+//                                                self.accumulatedPointCloud.colors[i].x,
+//                                                self.accumulatedPointCloud.colors[i].y,
+//                                                self.accumulatedPointCloud.colors[i].z)
+//                    if let ARKitPointDataToWrite = ARKitPointData.data(using: .utf8) {
+//                        self.fileHandlers[self.ARKIT_POINT_CLOUD].write(ARKitPointDataToWrite)
+//                    } else {
+//                        os_log("Failed to write data record", log: OSLog.default, type: .fault)
+//                    }
+//                }
+//
+//                // close the file handlers
+//                if (self.fileHandlers.count == self.numTextFiles) {
+//                    for handler in self.fileHandlers {
+//                        handler.closeFile()
+//                    }
+//                    DispatchQueue.main.async {
+//                        let activityVC = UIActivityViewController(activityItems: self.fileURLs, applicationActivities: nil)
+//                        self.present(activityVC, animated: true, completion: nil)
+//                    }
+//                }
+//            }
             
             // initialize UI on the screen
             self.numberOfFeatureLabel.text = ""
@@ -237,7 +283,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, We
         
         let imageFrame = frame.capturedImage
         let imageResolution = frame.camera.imageResolution
-        let K = frame.camera.intrinsics
+        _ = frame.camera.intrinsics
         
         let ARKitWorldMappingStatus = frame.worldMappingStatus.rawValue
         let ARKitTrackingState = frame.camera.trackingState
@@ -261,6 +307,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, We
         
         // dispatch queue to display UI
         DispatchQueue.main.async {
+            
             self.numberOfFeatureLabel.text = String(format:"%05d", self.accumulatedPointCloud.count)
             self.trackingStatusLabel.text = "\(ARKitTrackingState)"
             self.updateRateLabel.text = String(format:"%.3f Hz", updateRate)
@@ -271,11 +318,31 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, We
             self.Zpos.text = String(format: "%.3f", t_z)
             
             // send our position data to our websocket
-            let posData = String(format: "%06.3f %06.3f %06.3f", t_x, t_y, t_z)
+            //let posData = String(format: "%06.3f %06.3f %06.3f", t_x, t_y, t_z)
+            if (self.isRecording == true) {
+                let posData = ARPosition(xPos: Float64(t_x), yPos: Float64(t_y), zPos: Float64(t_z))
+                do {
+                    let posJSONData = try JSONEncoder().encode(posData)
+                    let posJSONString = String(data: posJSONData, encoding: .utf8)!
+                    self.socket.write(string: posJSONString)
+                    
+                } catch { print(error) }
+            }
+
             //if let posDataToWrite = posData.data(using: .utf8) {
-                self.socket.write(string: posData)
+            //self.socket.write(string: posJSONString)
             //}
             //socket.write(string: String(format: "%3.2f %3.2f %3.2f", t_x, t_y, t_z))
+
+            
+            // send our position data through RBSManager
+//            if (self.rosConnected == true) {
+//                let vector3msg = Vector3Message()
+//                vector3msg.x = Float64(t_x)
+//                vector3msg.y = Float64(t_y)
+//                vector3msg.z = Float64(t_z)
+//                self.rosPublisher?.publish(vector3msg)
+//            }
             
             var worldMappingStatus = ""
             switch ARKitWorldMappingStatus {
