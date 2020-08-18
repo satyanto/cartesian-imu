@@ -17,11 +17,11 @@ wss.on('connection', (ws) => {
 
     // user sent a message
     ws.on('message', function(message) {
-        if (message.type === 'utf8') {      // make sure the messages the server receives is a string
+        //if (message.type === 'utf8') {      // make sure the messages the server receives is a string
             wss.clients.forEach((client) => {
                 client.sendUTF(message);    // we are simply the messenger
             });
-        }
+        //}
     });
 
     // user disconnected
