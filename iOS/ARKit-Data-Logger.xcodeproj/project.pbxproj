@@ -1,0 +1,461 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		163F2D5924E4EC210086B9F4 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163F2D5724E4EC1D0086B9F4 /* SceneKit.framework */; };
+		16F83C9F24DF9C3E0062102B /* ARKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16F83C9A24DF9C340062102B /* ARKit.framework */; };
+		16F83CA424DFA1050062102B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16F83CA224DF9D2D0062102B /* CoreMotion.framework */; };
+		1E8F0E7701223F803E9916E2 /* Pods_ARKit_Data_Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07023BD9454EB423A1BF8945 /* Pods_ARKit_Data_Logger.framework */; };
+		2E0C77BB22A7478C00C2D672 /* UsefulFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0C77BA22A7478C00C2D672 /* UsefulFunctions.swift */; };
+		2E7A6D4122C4B7C4007B7FBD /* AccumulatedPointCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7A6D4022C4B7C4007B7FBD /* AccumulatedPointCloud.swift */; };
+		2EC6C60022A673C2001C517D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6C5FF22A673C2001C517D /* AppDelegate.swift */; };
+		2EC6C60222A673C2001C517D /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EC6C60122A673C2001C517D /* art.scnassets */; };
+		2EC6C60422A673C2001C517D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6C60322A673C2001C517D /* ViewController.swift */; };
+		2EC6C60722A673C2001C517D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EC6C60522A673C2001C517D /* Main.storyboard */; };
+		2EC6C60922A673C3001C517D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EC6C60822A673C3001C517D /* Assets.xcassets */; };
+		2EC6C60C22A673C3001C517D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EC6C60A22A673C3001C517D /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		07023BD9454EB423A1BF8945 /* Pods_ARKit_Data_Logger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARKit_Data_Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		163F2D5724E4EC1D0086B9F4 /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
+		16F83C9A24DF9C340062102B /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = System/Library/Frameworks/ARKit.framework; sourceTree = SDKROOT; };
+		16F83CA224DF9D2D0062102B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		2E0C77BA22A7478C00C2D672 /* UsefulFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsefulFunctions.swift; sourceTree = "<group>"; };
+		2E7A6D4022C4B7C4007B7FBD /* AccumulatedPointCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccumulatedPointCloud.swift; sourceTree = "<group>"; };
+		2EC6C5FC22A673C2001C517D /* ARKit-Data-Logger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ARKit-Data-Logger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EC6C5FF22A673C2001C517D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2EC6C60122A673C2001C517D /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
+		2EC6C60322A673C2001C517D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2EC6C60622A673C2001C517D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2EC6C60822A673C3001C517D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2EC6C60B22A673C3001C517D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2EC6C60D22A673C3001C517D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A104CDDBF745BF6FC9B1E74 /* Pods-ARKit-Data-Logger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARKit-Data-Logger.debug.xcconfig"; path = "Target Support Files/Pods-ARKit-Data-Logger/Pods-ARKit-Data-Logger.debug.xcconfig"; sourceTree = "<group>"; };
+		711C7AB3408FFDB9D8451603 /* Pods-ARKit-Data-Logger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARKit-Data-Logger.release.xcconfig"; path = "Target Support Files/Pods-ARKit-Data-Logger/Pods-ARKit-Data-Logger.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2EC6C5F922A673C2001C517D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16F83C9F24DF9C3E0062102B /* ARKit.framework in Frameworks */,
+				163F2D5924E4EC210086B9F4 /* SceneKit.framework in Frameworks */,
+				16F83CA424DFA1050062102B /* CoreMotion.framework in Frameworks */,
+				1E8F0E7701223F803E9916E2 /* Pods_ARKit_Data_Logger.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		16F83C9924DF9C340062102B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				163F2D5724E4EC1D0086B9F4 /* SceneKit.framework */,
+				16F83CA224DF9D2D0062102B /* CoreMotion.framework */,
+				16F83C9A24DF9C340062102B /* ARKit.framework */,
+				07023BD9454EB423A1BF8945 /* Pods_ARKit_Data_Logger.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2E7A6D3D22C4B6CC007B7FBD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2E7A6D4022C4B7C4007B7FBD /* AccumulatedPointCloud.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2E7A6D3E22C4B70D007B7FBD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2EC6C60522A673C2001C517D /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2E7A6D3F22C4B72F007B7FBD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2EC6C60322A673C2001C517D /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2EC6C5F322A673C2001C517D = {
+			isa = PBXGroup;
+			children = (
+				2EC6C5FE22A673C2001C517D /* ARKit-Data-Logger */,
+				2EC6C5FD22A673C2001C517D /* Products */,
+				16F83C9924DF9C340062102B /* Frameworks */,
+				3021522DBBBCD12069ABA733 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		2EC6C5FD22A673C2001C517D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2EC6C5FC22A673C2001C517D /* ARKit-Data-Logger.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2EC6C5FE22A673C2001C517D /* ARKit-Data-Logger */ = {
+			isa = PBXGroup;
+			children = (
+				2E7A6D3D22C4B6CC007B7FBD /* Model */,
+				2E7A6D3E22C4B70D007B7FBD /* View */,
+				2E7A6D3F22C4B72F007B7FBD /* Controller */,
+				2EC6C60822A673C3001C517D /* Assets.xcassets */,
+				2E0C77BA22A7478C00C2D672 /* UsefulFunctions.swift */,
+				2EC6C60A22A673C3001C517D /* LaunchScreen.storyboard */,
+				2EC6C60122A673C2001C517D /* art.scnassets */,
+				2EC6C5FF22A673C2001C517D /* AppDelegate.swift */,
+				2EC6C60D22A673C3001C517D /* Info.plist */,
+			);
+			path = "ARKit-Data-Logger";
+			sourceTree = "<group>";
+		};
+		3021522DBBBCD12069ABA733 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4A104CDDBF745BF6FC9B1E74 /* Pods-ARKit-Data-Logger.debug.xcconfig */,
+				711C7AB3408FFDB9D8451603 /* Pods-ARKit-Data-Logger.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2EC6C5FB22A673C2001C517D /* ARKit-Data-Logger */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2EC6C61022A673C3001C517D /* Build configuration list for PBXNativeTarget "ARKit-Data-Logger" */;
+			buildPhases = (
+				05899819D2F6E1015DC33317 /* [CP] Check Pods Manifest.lock */,
+				2EC6C5F822A673C2001C517D /* Sources */,
+				2EC6C5F922A673C2001C517D /* Frameworks */,
+				2EC6C5FA22A673C2001C517D /* Resources */,
+				3182A01ECB37EEEE40781814 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ARKit-Data-Logger";
+			productName = "ARKit-Data-Logger";
+			productReference = 2EC6C5FC22A673C2001C517D /* ARKit-Data-Logger.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2EC6C5F422A673C2001C517D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1200;
+				ORGANIZATIONNAME = "Pyojin Kim";
+				TargetAttributes = {
+					2EC6C5FB22A673C2001C517D = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 2EC6C5F722A673C2001C517D /* Build configuration list for PBXProject "ARKit-Data-Logger" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2EC6C5F322A673C2001C517D;
+			productRefGroup = 2EC6C5FD22A673C2001C517D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2EC6C5FB22A673C2001C517D /* ARKit-Data-Logger */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2EC6C5FA22A673C2001C517D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EC6C60222A673C2001C517D /* art.scnassets in Resources */,
+				2EC6C60C22A673C3001C517D /* LaunchScreen.storyboard in Resources */,
+				2EC6C60922A673C3001C517D /* Assets.xcassets in Resources */,
+				2EC6C60722A673C2001C517D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		05899819D2F6E1015DC33317 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ARKit-Data-Logger-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3182A01ECB37EEEE40781814 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ARKit-Data-Logger/Pods-ARKit-Data-Logger-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ARKit-Data-Logger/Pods-ARKit-Data-Logger-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ARKit-Data-Logger/Pods-ARKit-Data-Logger-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2EC6C5F822A673C2001C517D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EC6C60422A673C2001C517D /* ViewController.swift in Sources */,
+				2E0C77BB22A7478C00C2D672 /* UsefulFunctions.swift in Sources */,
+				2EC6C60022A673C2001C517D /* AppDelegate.swift in Sources */,
+				2E7A6D4122C4B7C4007B7FBD /* AccumulatedPointCloud.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2EC6C60522A673C2001C517D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2EC6C60622A673C2001C517D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2EC6C60A22A673C3001C517D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2EC6C60B22A673C3001C517D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2EC6C60E22A673C3001C517D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2EC6C60F22A673C3001C517D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2EC6C61122A673C3001C517D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A104CDDBF745BF6FC9B1E74 /* Pods-ARKit-Data-Logger.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PQFPQ9P2CZ;
+				INFOPLIST_FILE = "ARKit-Data-Logger/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.satyanto.arkitdatalogger;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2EC6C61222A673C3001C517D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 711C7AB3408FFDB9D8451603 /* Pods-ARKit-Data-Logger.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PQFPQ9P2CZ;
+				INFOPLIST_FILE = "ARKit-Data-Logger/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.satyanto.arkitdatalogger;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2EC6C5F722A673C2001C517D /* Build configuration list for PBXProject "ARKit-Data-Logger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EC6C60E22A673C3001C517D /* Debug */,
+				2EC6C60F22A673C3001C517D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2EC6C61022A673C3001C517D /* Build configuration list for PBXNativeTarget "ARKit-Data-Logger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EC6C61122A673C3001C517D /* Debug */,
+				2EC6C61222A673C3001C517D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2EC6C5F422A673C2001C517D /* Project object */;
+}
