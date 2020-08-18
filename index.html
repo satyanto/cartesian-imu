@@ -29,9 +29,9 @@
             ws.onmessage = function (event) {
                 var string = event.data;
                 var dataobj = JSON.parse(string);
-                document.getElementById('xPos').innerHTML = dataobj.xPos;
-                document.getElementById('yPos').innerHTML = dataobj.yPos;
-                document.getElementById('zPos').innerHTML = dataobj.zPos;
+                document.getElementById('xPos').innerHTML = "xPos: " + dataobj.xPos;
+                document.getElementById('yPos').innerHTML = "yPos: " + dataobj.yPos;
+                document.getElementById('zPos').innerHTML = "zPos: " + dataobj.zPos;
                 document.getElementById('debugmsg').innerHTML = "debugmsg: " + string;
                 docuemnt.getElementById('debugjson').innerHTML = "debugjson: " + dataobj;
             }
