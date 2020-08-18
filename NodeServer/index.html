@@ -2,6 +2,17 @@
 <html>
     <title>Cartesian Server</title>
     <body>
-        <script src="./server.js"></script>
+        <h2>Cartesian Server</h2>
+        <p id="jsonlabel">Heyyyyyyyyyyy........</p>
+        <!-- <script src="./server.js"></script> -->
+        <script>
+            var HOST = location.origin.replace(/^http/, 'ws')
+            var ws = new WebSocket(HOST);
+
+            ws.onmessage = function (event) {
+                document.getElementById('jsonlabel').innerHTML = event.data;
+            }
+        </script>
+
     </body>
 </html>
