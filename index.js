@@ -19,7 +19,7 @@ wss.on('connection', (ws) => {
     ws.on('message', function(message) {
         //if (message.type === 'utf8') {      // make sure the messages the server receives is a string
             wss.clients.forEach((client) => {
-                client.sendUTF(message);    // we are simply the messenger
+                client.send(message);    // we are simply the messenger
             });
         //}
     });
