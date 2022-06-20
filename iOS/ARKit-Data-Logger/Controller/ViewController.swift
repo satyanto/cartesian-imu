@@ -320,7 +320,10 @@ class ViewController:
             // send our position data to our websocket
             //let posData = String(format: "%06.3f %06.3f %06.3f", t_x, t_y, t_z)
             if (self.isRecording == true) {
-                let posData = ARPosition(xPos: Float64(t_x), yPos: Float64(t_y), zPos: Float64(t_z))
+                
+                // NOTE: our coordinate frames are different between ARKit and Frank robot
+                // from my experience, our ARKit's Y axis is better suited as our Frank robot's Z axis
+                let posData = ARPosition(xPos: Float64(t_x), yPos: Float64(t_z), zPos: Float64(t_y))
                 do {
                     let posJSONData = try JSONEncoder().encode(posData)
                     let posJSONString = String(data: posJSONData, encoding: .utf8)!
